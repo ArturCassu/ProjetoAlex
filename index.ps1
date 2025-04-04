@@ -8,7 +8,7 @@ if ($MyInvocation.MyCommand.Path) {
 # Ensure the script is running from a file, otherwise download itself
 if (-not $ScriptPath) {
     $ScriptPath = "$env:TEMP\startup.ps1"
-    Invoke-WebRequest -Uri "https://raw.githubusercontent.com/USERNAME/REPO/main/startup.ps1" -OutFile $ScriptPath
+    Invoke-WebRequest -Uri "https://raw.githubusercontent.com/ArturCassu/ProjetoAlex/main/index.ps1" -OutFile $ScriptPath
 }
 
 # Get the startup folder path
