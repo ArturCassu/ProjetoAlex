@@ -12,5 +12,3 @@ $StartupScriptPath = [System.IO.Path]::Combine($StartupFolder, "index.ps1")
 
 # Copy the script to the startup folder
 Copy-Item -Path $ScriptPath -Destination $StartupScriptPath -Force
-
-Write-Host "Script added to startup: $StartupScriptPath"
