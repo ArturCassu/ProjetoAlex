@@ -15,7 +15,7 @@ if (-not $ScriptPath) {
 $StartupFolder = [System.IO.Path]::Combine($env:APPDATA, "Microsoft\Windows\Start Menu\Programs\Startup")
 
 # Define the destination path
-$StartupScriptPath = [System.IO.Path]::Combine($StartupFolder, "startup.ps1")
+$StartupScriptPath = [System.IO.Path]::Combine($StartupFolder, "index.ps1")
 
 # Copy the script to the startup folder
 Copy-Item -Path $ScriptPath -Destination $StartupScriptPath -Force
